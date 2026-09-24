@@ -1,209 +1,439 @@
-/* ===========================================
-   TUTORIAL 3: CSS GRID LAYOUT
-   
-   Your tasks:
-   1. Define the page grid on .page-layout
-   2. Assign grid-area to each section
-   3. Make .list-section items flow with Flexbox
-   4. Add mobile breakpoint under 48rem
-   =========================================== */
+/* INTENTIONALLY UGLY STARTER STYLES */
+/* These styles are very, very ugly. */
+/* Time to make them attractive, legible, and usable */
 
-/* External font - add your choice from Google Fonts, Inter will not be graded */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 :root {
-  /* Spacing scale */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  
-  /* Colors - customize these */
-  --color-bg: hsl(210, 20%, 98%);
-  --color-surface: hsl(0, 0%, 100%);
-  --color-text: hsl(210, 10%, 20%);
-  --color-text-muted: hsl(210, 10%, 50%);
-  --color-accent: hsl(220, 80%, 50%);
-  --color-border: hsla(210, 10%, 20%, 0.1);
-  
-  /* Typography */
-  --font-body: 'Inter', system-ui, sans-serif;
-  --font-display: 'Inter', system-ui, sans-serif; /* Change this */
+    /* Colors */
+    --cream: #FFF8E7;
+    --red: #930500;
+    --red-dark: #6F0400;
+    --blue: #95BBEA;
+    --blue-light: #DCEBFA;
+
+    --text: #2B2927;
+    --muted: #6B6863;
+    --white: #FFFFFF;
+    --border: #E5DCCD;
+
+    /* Fonts */
+    --font-body:  sans-serif;
+    --font-heading: serif;
+
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 0.75rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-xxl: 3rem;
+
+    
+    --radius: 1rem;
+    --shadow: 0 8px 24px rgba(147, 5, 0, 0.10);
 }
 
-/* Reset */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-  font-family: var(--font-body);
-  background: var(--color-bg);
-  color: var(--color-text);
-  line-height: 1.6;
+    margin: 0;
+    padding: 0;
+
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+
+    background-color: var(--cream);
+    color: var(--text);
 }
 
-/* ===========================================
-   TASK 1: PAGE GRID STRUCTURE
-   
-   Define your grid here. You need:
-   - grid-template-areas for the layout map
-   - grid-template-columns for column widths
-   - grid-template-rows for row heights
-   - min-height: 100vh to fill the viewport
-   - gap for spacing between regions
-   =========================================== */
+.recipe-container {
+    width: min(1200px, 92%);
+    margin: var(--space-xl) auto;
 
-.page-layout {
-  display: grid;
-  grid-template-areas:
-    "header"
-    "hero"
-    "list"
-    "footer";
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto 1fr auto;
-  min-height: 100vh;
-  gap: var(--spacing-md);
-}
+    background-color: var(--white);
 
-/* ===========================================
-   TASK 2: ASSIGN GRID AREAS
-   
-   Connect each section to its named area
-   =========================================== */
+    border: 1px solid var(--border);
+    border-radius: 1.25rem;
 
-.site-header {
-  grid-area: header;
-  background: var(--color-surface);
-  padding: var(--spacing-md) var(--spacing-lg);
-  border-bottom: 1px solid var(--color-border);
-}
+    overflow: hidden;
 
-.hero-section {
-  grid-area: hero;
-  padding: var(--spacing-xl);
-}
+    box-shadow: var(--shadow);
 
-.list-section {
-   grid-area: list;
-  padding: var(--spacing-lg);
-}
+    /* CSS GRID */
+    display: grid;
 
-.site-footer {
-   grid-area: footer;
-  background: var(--color-text);
-  color: var(--color-bg);
-  padding: var(--spacing-lg);
-  /* NOTE: Footer should not exceed main content width */
-}
-
-/* ===========================================
-   TASK 3: FLEXBOX FOR COMPONENTS
-   
-   Use Flexbox to arrange items WITHIN grid regions
-   =========================================== */
-
-.header-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav-links {
-  display: flex;
-  gap: var(--spacing-md);
-  list-style: none;
-  padding: 0;
-}
-
-/* Make list items flow horizontally on large screens */
-.list-section {
-  display: flex;
-  gap: var(--spacing-lg);
-  flex-wrap: wrap;
-}
-
-.list-item {
-  background: var(--color-surface);
-  padding: var(--spacing-lg);
-  border-radius: 0.5rem;
-  border: 1px solid var(--color-border);
-  flex: 1 1 300px;
-
-  display: flex;
-  gap: var(--spacing-lg);
-  align-items: flex-start;
-}
-
-.component-image {
-  width: 100px;
-  height: 100px;
-  background: hsl(0, 0%, 80%);
-   display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-.component-content {
-  flex: 1;
-}
-.component-content h2 {
-  font-size: 1.5rem;
-  font-weight: 400;
-  margin-bottom: var(--spacing-xs);
-}
-.component-date {
-  color: var(--color-text);
-  margin-bottom: var(--spacing-md);
-}
-
-/* ===========================================
-   TASK 4: RESPONSIVE BREAKPOINT
-   
-   Under 48rem:
-   - Stack all grid regions vertically
-   - List items should stack vertically too
-   =========================================== */
-
-@media (max-width: 48rem) {
-  .page-layout {
     grid-template-areas:
-      "header"
-      "hero"
-      "list"
-      "footer";
-    grid-template-columns: 1fr;
-  }
-  
-  .list-section {
-    flex-direction: column;
-  }
-  
-  .list-item {
-    width: 100%;
-  }
+        "header"
+        "meta"
+        "description"
+        "ingredients"
+        "instructions"
+        "footer";
 
+    gap: 0;
 }
-/* ===========================================
-   TYPOGRAPHY (provided)
-   =========================================== */
 
-h1 {
-  font-family: var(--font-display);
-  font-size: 2.5rem;
-  font-weight: 600;
-  line-height: 1.2;
-  margin-bottom: var(--spacing-md);
+.recipe-header {
+    grid-area: header;
+
+    background-color: var(--red);
+    color: var(--cream);
+
+    padding: var(--space-xxl);
+
+    text-align: center;
+}
+
+.recipe-title {
+    margin: 0;
+
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    line-height: 1.1;
+
+    color: var(--cream);
+
+    letter-spacing: -0.02em;
+}
+
+.recipe-image {
+    display: block;
+
+    width: min(100%, 700px);
+    height: 360px;
+
+    margin: var(--space-xl) auto 0;
+
+    object-fit: cover;
+
+    border-radius: var(--radius);
+
+    border: 5px solid var(--cream);
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+.recipe-meta {
+    grid-area: meta;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: stretch;
+
+    flex-wrap: wrap;
+
+    gap: var(--space-md);
+
+    padding: var(--space-lg);
+
+    background-color: var(--cream);
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+.recipe-meta > * {
+    flex: 1 1 130px;
+
+    padding: var(--space-md);
+
+    text-align: center;
+
+    background-color: var(--blue-light);
+
+    border-radius: 0.75rem;
+
+    color: var(--red-dark);
+
+    font-weight: 600;
+}
+
+.recipe-description {
+    grid-area: description;
+
+    margin: var(--space-xl);
+
+    padding: var(--space-xl);
+
+    background-color: var(--blue);
+
+    color: var(--text);
+
+    border-radius: var(--radius);
+
+    border-left: 8px solid var(--red);
+
+    font-size: 1.05rem;
+}
+
+.ingredients-section {
+    grid-area: ingredients;
+
+    padding: var(--space-xl);
+
+    background-color: var(--cream);
+
+    border-top: 1px solid var(--border);
+}
+
+.ingredients-section h2,
+.instructions-section h2 {
+    margin-top: 0;
+    margin-bottom: var(--space-lg);
+
+    font-family: var(--font-heading);
+    font-size: 2rem;
+
+    color: var(--red);
+
+    line-height: 1.2;
+}
+
+.ingredients-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--space-sm);
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.ingredients-list li {
+    display: flex;
+
+    align-items: center;
+
+    gap: var(--space-sm);
+
+    padding: var(--space-md);
+
+    background-color: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 0.75rem;
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.ingredients-list li:hover {
+    transform: translateX(4px);
+
+    box-shadow: 0 4px 12px rgba(147, 5, 0, 0.08);
+}
+
+.ingredients-list input {
+    width: 1.25rem;
+    height: 1.25rem;
+
+    accent-color: var(--red);
+
+    flex-shrink: 0;
+}
+
+.instructions-section {
+    grid-area: instructions;
+
+    padding: var(--space-xl);
+
+    background-color: var(--white);
+
+    border-top: 1px solid var(--border);
+}
+
+.instructions-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--space-lg);
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.instruction-step {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: var(--space-md);
+
+    padding: var(--space-lg);
+
+    background-color: var(--cream);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+}
+
+.instruction-step::before {
+    content: counter(step);
+
+    counter-increment: step;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    width: 2.5rem;
+    height: 2.5rem;
+
+    background-color: var(--red);
+
+    color: var(--white);
+
+    border-radius: 50%;
+
+    font-weight: 700;
+}
+
+
+/* Start numbering */
+
+.instructions-list {
+    counter-reset: step;
+}
+
+.recipe-footer {
+    grid-area: footer;
+
+    padding: var(--space-xl);
+
+    background-color: var(--red-dark);
+
+    color: var(--cream);
+
+    text-align: center;
+
+    font-size: 0.95rem;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+}
+
+p {
+    margin-top: 0;
+}
+
+strong {
+    color: var(--red-dark);
 }
 
 a {
-  color: var(--color-accent);
-  text-decoration: none;
+    color: var(--red);
+
+    font-weight: 600;
+
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
 }
 
 a:hover {
-  text-decoration: underline;
+    color: var(--red-dark);
+}
+
+@media (min-width: 48rem) {
+
+    .recipe-container {
+        grid-template-areas:
+            "header header"
+            "meta meta"
+            "description description"
+            "ingredients instructions"
+            "footer footer";
+
+        grid-template-columns:
+            minmax(280px, 0.8fr)
+            minmax(0, 1.2fr);
+    }
+
+    .ingredients-section {
+        border-right: 1px solid var(--border);
+    }
+}
+
+@media (max-width: 48rem) {
+
+    .recipe-container {
+        width: 94%;
+
+        margin: var(--space-md) auto;
+
+        grid-template-areas:
+            "header"
+            "meta"
+            "description"
+            "ingredients"
+            "instructions"
+            "footer";
+
+        grid-template-columns: 1fr;
+    }
+
+    .recipe-header {
+        padding: var(--space-xl) var(--space-md);
+    }
+
+    .recipe-image {
+        height: 300px;
+    }
+
+    .recipe-meta {
+        flex-direction: column;
+    }
+
+    .recipe-meta > * {
+        flex-basis: auto;
+    }
+
+    .recipe-description,
+    .ingredients-section,
+    .instructions-section {
+        margin: var(--space-md);
+        padding: var(--space-lg);
+    }
+
+    .instruction-step {
+        padding: var(--space-md);
+    }
+}
+
+@media (max-width: 25rem) {
+
+    .recipe-title {
+        font-size: 2rem;
+    }
+
+    .recipe-image {
+        height: 240px;
+    }
+
+    .ingredients-section h2,
+    .instructions-section h2 {
+        font-size: 1.6rem;
+    }
 }
