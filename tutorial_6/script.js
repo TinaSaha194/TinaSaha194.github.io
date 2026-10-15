@@ -180,40 +180,41 @@ mappedList.appendChild(nameList);
     // ============================================
     
     // This demonstrates what happens when fetch() fails
-    errorButton.addEventListener('click', async function() {
+   errorButton.addEventListener('click', async function() {
         const errorDisplay = document.querySelector('#error-display');
-        
-        errorDisplay.innerHTML = '<div class="status-display loading"><p class="status-message">Trying to load from bad URL...</p></div>';
-        
-        try {
-            // This will fail because the URL doesn't exist
-            const response = await fetch('nonexistent-file.json');
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const data = await response.json();
-            errorDisplay.innerHTML = '<p class="placeholder">This should not appear</p>';
-            
-        } catch (error) {
-            // Step 10: Show user-friendly error message
-            // Hint: Create error message div with helpful text
-            
-            errorDisplay.innerHTML = `
-            <div class="error-message">
-                <strong>Unable to load the data.</strong>
-                <p>Please check the file or network connection and try again.</p>
-                <button class="error-button"
-        onclick="document.querySelector('#load-data-button').click()">
-    Try Again
-</button>
+
+        errorDisplay.innerHTML = `
+            <div class="status-display loading">
+                <p class="status-message">Trying to load from bad URL...</p>
             </div>
         `;
 
-        console.error('Demonstrated error:', error);
-    }
-});
+        try {
+            const response = await fetch('nonexistent-file.json');
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            errorDisplay.innerHTML =
+                '<p class="placeholder">This should not appear</p>';
+
+        } catch (error) {
+            errorDisplay.innerHTML = `
+                <div class="error-message">
+                    <strong>Unable to load the data.</strong>
+                    <p>Please check the file or network connection and try again.</p>
+                    <button class="error-button"
+                        onclick="document.querySelector('#load-data-button').click()">
+                        Try Again
+                    </button>
+                </div>
+            `;
+
+            console.error('Demonstrated error:', error);
+        }
+    });
 
 // ============================================
 // UTILITY FUNCTIONS
