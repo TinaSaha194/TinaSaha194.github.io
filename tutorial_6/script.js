@@ -284,13 +284,19 @@ function resetTutorial() {
     restaurants = [];
     toggleMethodButtons(false);
     updateStatus('ready', 'Ready to load data');
-    
-    // Clear all displays
-    document.querySelector('#restaurant-list').innerHTML = '<p class="placeholder">Load data first, then click to display all restaurants</p>';
-    document.querySelector('#filtered-list').innerHTML = '<p class="placeholder">Load data first, then click to show only affordable restaurants</p>';
-    document.querySelector('#mapped-list').innerHTML = '<p class="placeholder">Load data first, then click to show just the restaurant names</p>';
-    document.querySelector('#error-display').innerHTML = '<p class="placeholder">Click to see error handling in action</p>';
-    
+
+    document.querySelector('#restaurant-list').innerHTML =
+        '<p class="placeholder">Load data first, then click to display all restaurants</p>';
+
+    document.querySelector('#filtered-list').innerHTML =
+        '<p class="placeholder">Load data first, then click to show only affordable restaurants</p>';
+
+    document.querySelector('#mapped-list').innerHTML =
+        '<p class="placeholder">Load data first, then click to show just the restaurant names</p>';
+
+    document.querySelector('#error-display').innerHTML =
+        '<p class="placeholder">Click to see error handling in action</p>';
+
     console.log('Tutorial reset');
 }
 
