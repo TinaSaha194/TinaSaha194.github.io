@@ -156,8 +156,8 @@ cheapRestaurants.forEach(function(restaurant) {
         // Hint: const names = restaurants.map(function(restaurant) { })
         
         const names = restaurants.map(function(restaurant) {
-    return restaurant.name;
-});
+            return restaurant.name;
+        });
 
 mappedList.innerHTML = '';
 
@@ -212,9 +212,11 @@ mappedList.appendChild(nameList);
                 </div>
             `;
 
-            console.error('Demonstrated error:', error);
+            cconsole.error('Demonstrated error:', error);
         }
     });
+
+});
 
 // ============================================
 // UTILITY FUNCTIONS
