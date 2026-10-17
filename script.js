@@ -211,8 +211,11 @@ mappedList.appendChild(nameList);
             </div>
         `;
 
-        console.error('Demonstrated error:', error);
+       console.error('Demonstrated error:', error);
     }
+});
+
+// Close DOMContentLoaded before utility functions
 });
 
 // ============================================
@@ -293,6 +296,7 @@ function resetTutorial() {
     
     console.log('Tutorial reset');
 }
+
 
 // Call these functions in the browser console:
 // checkDataStatus() - see if data is loaded
