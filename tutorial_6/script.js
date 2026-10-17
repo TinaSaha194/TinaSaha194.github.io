@@ -302,6 +302,7 @@ function resetTutorial() {
 
     console.log('Tutorial reset');
 }
+});
 
 // Call these functions in the browser console:
 // checkDataStatus() - see if data is loaded
